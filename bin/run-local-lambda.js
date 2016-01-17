@@ -113,11 +113,6 @@
 
 	var lambda = require(path.resolve(settings.file, '.'));
 
-	setTimeout(function(){
-		console.log('hello');
-
-	}, 1000);
-
 	var execute = function(){
 		setTimeout(function(){
 			console.log('The function timed out after ' + (settings.timeout/1000).toFixed(2) + 's');
