@@ -1,0 +1,25 @@
+{
+  "name": "run-local-lambda",
+  "version": "1.0.0",
+  "description": "Run & test Lambda functions locally on your computer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sbarski/run-local-lambda.git"
+  },
+  "bin":{
+    "run-local-lambda": "bin/run-local-lambda.js"
+  },
+  "keywords": [
+    "lambda",
+    "local",
+    "aws",
+    "function",
+    "run"
+  ],
+  "author": "Peter Sbarski",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/sbarski/run-local-lambda/issues"
+  },
+  "homepage": "https://github.com/sbarski/run-local-lambda"
+}
