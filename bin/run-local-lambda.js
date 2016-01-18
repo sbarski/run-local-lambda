@@ -12,18 +12,17 @@
  *
  */
 
-"use strict";
+'use strict';
 
 (function(){
 
 	var path = require('path');
 
 	var settings = {
-		file : "index.js",
-		event : "event.json",
+		file : 'index.js',
+		event : 'event.json',
 		timeout : 3000,
-		memory : 128,
-		handler : "handler"
+		handler : 'handler'
 	};
 
 	/* 
@@ -41,22 +40,22 @@
 	var processArguments = function(settings) {
 		process.argv.forEach(function(argument, index, array){
 			switch (argument){
-				case "--file": {
+				case '--file': {
 					settings.file = array[index+1];
 					break;
 				}
 
-				case "--event": {
+				case '--event': {
 					settings.event = array[index+1];
 					break;
 				}
 
-				case "--timeout": {
+				case '--timeout': {
 					settings.timeout = parseInt(array[index+1], 10) * 1000; //convert seconds to milliseconds
 					break;
 				}
 
-				case "--handler": {
+				case '--handler': {
 					settings.handler = array[index+1];
 					break;
 				}
@@ -115,7 +114,7 @@
 
 	var execute = function(){
 		setTimeout(function(){
-			console.log('The function timed out after ' + (settings.timeout/1000).toFixed(2) + 's');
+			console.log('The function timed out after ' + settings.timeout + ' seconds');
 			process.exit();
 		}, settings.timeout);
 
