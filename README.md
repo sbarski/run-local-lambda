@@ -2,10 +2,9 @@
 > An npm module to help you run and test Lambda functions locally
 
 This module has been designed to be run by npm as part of a test script. It is a replacement for similar grunt/gulp Lambda plugins and is useful for developers wishing to use npm for everything.
-While you can run and install it globally it is far better to include it with your Lambda solution. 
 
 * This module allows you to run and test Lambda functions on your computer or in a continuous integration setting.
-* You can pass in any event JSON object that you need.
+* You can pass in any event data JSON object to simulate a Lambda event 
 * The context object is taken care off for you by the module.
 
 ## Getting Started
@@ -20,24 +19,25 @@ Your Lambda function should have a package.json which you can modify to add a te
 ```js
 "scripts": {
     "test": "run-local-lambda --file index.js --event tests/event.json --timeout 3"
-  }
+}
 ```
 
-Finally, you can invoke your test by simply doing the following:
+Finally, you can invoke your test by simply running:
 
 ```shell
-npm run test
+npm test
 ```
 
 ## Global Installation
 
-You can also install this module globally and run it from the command line. To install it, execute the following:
+You can also install this module globally and run it from the command line:
 
 ```shell
 npm install -g run-local-lambda
 ``` 
 
-To run this module 
+
+To run:
 ```shell
 run-local-lambda --file lambda.js --event event.json
 ```
@@ -52,58 +52,60 @@ This module accepts the following parameters which are all optional.
 * --timeout [timeout seconds] 	- The timeout in seconds. Default: 3
 
 ### Context
-The context object provides the following public methods as per the AWS implementation: 
+The context object provides the following public methods: 
 * context.succeed(Object result) 
 * context.fail(Error error)	
 * context.done(Error error, Object result)
 * context.getRemainingTimeInMillis()
 
-Please note that the implementations of these methods are mere approximations to enable Lambda functions to execute correctly.
-See [docs](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) for more information.  
+Please note that the implementations of these methods are mere approximations to enable Lambda functions to execute.
+See [AWS docs](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) for more information.  
 
 ### Event
-The event data file can be provided using the --event parameter. These are JSON objects such as follows:
+The event data file can be provided using the --event parameter. An event is just a JSON object such as:
 
 ```js
-{
-  "Records":[
-    {
-      "eventVersion":"2.0",
-      "eventSource":"aws:s3",
-      "awsRegion":"us-east-1",
-      "eventTime":"2016-12-11T00:00:00.000Z",
-      "eventName":"ObjectCreated:Put",
-      "userIdentity":{
-        "principalId":"A3MCB9FEJCFJSY"
-      },
-      "requestParameters":{
-        "sourceIPAddress":"127.0.0.1"
-      },
-      "responseElements":{
-        "x-amz-request-id":"3966C864F562A6A0",
-        "x-amz-id-2":"2radsa8X4nKpba7KbgVurmc7rwe/SDoYLFid6MZKn18Nocpe3Ofwo5TJ+uJCnkf/"
-      },
-      "s3":{
-        "s3SchemaVersion":"1.0",
-        "configurationId":"Video Upload",
-        "bucket":{
-          "name":"serverless-video-upload",
-          "ownerIdentity":{
-            "principalId":"A3MCB9FEJCFJSY"
-          },
-          "arn":"arn:aws:s3:::serverless-video-upload"
-        },
-        "object":{
-          "key":"my video.mp4",
-          "size":2236480,
-          "eTag":"ddb7a52094d2079a27ac44f83ca669e9",
-          "sequencer": "005686091F4FFF1565"
-        }
+{  
+   "Records":[  
+      {  
+         "eventVersion":"2.0",
+         "eventSource":"aws:s3",
+         "awsRegion":"us-west-2",
+         "eventTime":"1970-01-01T00:00:00.000Z",
+         "eventName":"ObjectCreated:Put",
+         "userIdentity":{  
+            "principalId":"AIDAJDPLRKLG7UEXAMPLE"
+         },
+         "requestParameters":{  
+            "sourceIPAddress":"127.0.0.1"
+         },
+         "responseElements":{  
+            "x-amz-request-id":"C3D13FE58DE4C810",
+            "x-amz-id-2":"FMyUVURIY8/IgAtTv8xRjskZQpcIZ9KG4V5Wp6S7S/JRWeUWerMUE5JgHvANOjpD"
+         },
+         "s3":{  
+            "s3SchemaVersion":"1.0",
+            "configurationId":"testConfigRule",
+            "bucket":{  
+               "name":"sourcebucket",
+               "ownerIdentity":{  
+                  "principalId":"A3NL1KOZZKExample"
+               },
+               "arn":"arn:aws:s3:::sourcebucket"
+            },
+            "object":{  
+               "key":"HappyFace.jpg",
+               "size":1024,
+               "eTag":"d41d8cd98f00b204e9800998ecf8427e",
+               "versionId":"096fKKXTRTtl3on89fVO.nfljtsv6qko"
+            }
+         }
       }
-    }
-  ]
+   ]
 }
 ```
+
+See this [AWS documentation](http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-upload-deployment-pkg.html) for more information on testing Lambda functions manually.
 
 ## Contributing
 There is no style guide so please try to follow the existing coding style. Please supply unit tests for any or modified functionality. Any and all PRs will be warmly welcomed. 
