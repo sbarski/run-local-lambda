@@ -4,7 +4,7 @@
 This module has been designed to be run by npm as part of a test script. It is a replacement for similar grunt/gulp Lambda plugins and is useful for developers wishing to use npm for everything.
 
 * This module allows you to run and test Lambda functions on your computer or in a continuous integration setting.
-* You can pass in any event data JSON object to simulate a Lambda event 
+* You can pass in any event data JSON object to simulate a Lambda event.
 * The context object is taken care off for you by the module.
 
 ## Getting Started
@@ -37,9 +37,9 @@ npm install -g run-local-lambda
 ``` 
 
 
-To run:
+To run your Lambda function, invoke the following:
 ```shell
-run-local-lambda --file lambda.js --event event.json
+run-local-lambda --file index.js --event event.json
 ```
 
 ## Overview
@@ -58,7 +58,7 @@ The context object provides the following public methods:
 * context.done(Error error, Object result)
 * context.getRemainingTimeInMillis()
 
-Please note that the implementations of these methods are mere approximations to enable Lambda functions to execute.
+Please note that the implementation of these methods are approximations to enable Lambda functions to execute.
 See [AWS docs](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) for more information.  
 
 ### Event
