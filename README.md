@@ -34,7 +34,7 @@ You can also install this module globally and run it from the command line:
 
 ```shell
 npm install -g run-local-lambda
-``` 
+```
 
 
 To run your Lambda function, invoke the following:
@@ -52,9 +52,9 @@ This module accepts the following parameters which are all optional.
 * --timeout [timeout seconds] 	- The timeout in seconds. Default: 3
 
 ### Context
-The context object provides the following public methods: 
-* context.succeed(Object result) 
-* context.fail(Error error)	
+The context object provides the following public methods:
+* context.succeed(Object result)
+* context.fail(Error error)
 * context.done(Error error, Object result)
 * context.getRemainingTimeInMillis()
 
@@ -108,8 +108,11 @@ The event data file can be provided using the --event parameter. An event is jus
 See this [AWS documentation](http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-upload-deployment-pkg.html) for more information on testing Lambda functions manually.
 
 ## Contributing
-There is no style guide so please try to follow the existing coding style. Please supply unit tests for any or modified functionality. Any and all PRs will be warmly welcomed. 
+There is no style guide so please try to follow the existing coding style. Please supply unit tests for any or modified functionality. Any and all PRs will be warmly welcomed.
 
 ## Release History
+### 1.1.0
+Updated to work with node.js 4.3 update of Lambda
+
 ### 1.0.0
 Initial Release

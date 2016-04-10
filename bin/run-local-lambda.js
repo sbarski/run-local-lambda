@@ -25,7 +25,7 @@
 		handler : 'handler'
 	};
 
-	/* 
+	/*
 	 * Q: Why not use commander to parse command line arguments? A. To reduce dependencies.
 	 *
 	 * Command Line Arguments:
@@ -33,7 +33,7 @@
 	 * --event, -e <event:string> 			#Name of the file containing the event object (Default: event.json)
 	 * --timeout, -t <timeout:int>			#The timeout in seconds (Default: 3 seconds)
 	 * --handler, -h <handler:string> 		#Name of the handler function to invoke (Default: handler.exports)
-	 * 
+	 *
 	 * E.g. node run-local-lambda (providing index.js and event.json are in the current directory)
 	 * E.g. node run-local-lambda --file index.js --event event.json --timeout 3 --memory 128 --handler handler
 	 */
@@ -105,6 +105,20 @@
 		return context;
 	}
 
+	var callback = function(error, result) {
+		if (error === undefined || error === null || error === '') {
+
+			if (result !== undefined && result !== null) {
+				console.log(JSON.stringify(result));
+			}
+
+		} else {
+			console.log("errorMessage:", JSON.stringify(error));
+		}
+
+		process.exit();
+	}
+
 	processArguments(settings);
 
 	var event = require(path.resolve(settings.event, '.'));
@@ -118,7 +132,7 @@
 			process.exit();
 		}, settings.timeout);
 
-		lambda[settings.handler](event, context)
+		lambda[settings.handler](event, context, callback)
 	};
 
 	execute();

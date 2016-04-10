@@ -3,8 +3,8 @@
  */
 'use strict';
 
-exports.handler = function(event, context){
+exports.handler = function(event, context, callback){
     console.log(event);
 
-    context.succeed('It worked!');
+    callback();
 };
