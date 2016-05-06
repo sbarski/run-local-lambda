@@ -1,6 +1,6 @@
 {
   "name": "run-local-lambda",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An npm module to help you run and test Lambda functions locally",
   "repository": {
     "type": "git",
