@@ -106,14 +106,20 @@
 	}
 
 	var callback = function(error, result) {
-		if (error === undefined || error === null || error === '') {
-
+		if (error === undefined || error === null) {
 			if (result !== undefined && result !== null) {
 				console.log(JSON.stringify(result));
 			}
-
 		} else {
-			console.log("errorMessage:", JSON.stringify(error));
+			if (error instanceof Error) {
+				console.log({
+					'errorMessage' : error.message,
+					'errorType' : error.name,
+					'stack' : error.stack
+				});
+			} else {
+				console.log('errorMessage: ' + error);
+			}
 		}
 
 		process.exit();
