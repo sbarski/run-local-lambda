@@ -110,7 +110,12 @@ See this [AWS documentation](http://docs.aws.amazon.com/lambda/latest/dg/with-s3
 ## Contributing
 There is no style guide so please try to follow the existing coding style. Please supply unit tests for any or modified functionality. Any and all PRs will be warmly welcomed.
 
+This module has been created in part to support [Serverless Architectures on AWS](https://www.manning.com/books/serverless-architectures-on-aws?a_aid=serverless-architectures-on-aws&a_bid=145280de)
+
 ## Release History
+### 1.1.1
+Updated runner to handle the Error object correctly
+
 ### 1.1.0
 Updated to work with node.js 4.3 update of Lambda
 
