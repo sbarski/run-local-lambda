@@ -1,13 +1,17 @@
 {
   "name": "run-local-lambda",
-  "version": "1.1.1",
-  "description": "An npm module to help you run and test Lambda functions locally",
+  "version": "1.1.2",
+  "description": "A NPM module to help you run and test Lambda functions locally",
   "repository": {
     "type": "git",
     "url": "https://github.com/sbarski/run-local-lambda.git"
   },
-  "bin":{
+  "bin": {
     "run-local-lambda": "bin/run-local-lambda.js"
+  },
+  "scripts": {
+    "clean": "rimraf bin",
+    "build": "npm run clean && tsc"
   },
   "keywords": [
     "lambda",
@@ -21,5 +25,13 @@
   "bugs": {
     "url": "https://github.com/sbarski/run-local-lambda/issues"
   },
-  "homepage": "https://github.com/sbarski/run-local-lambda"
+  "homepage": "https://github.com/sbarski/run-local-lambda",
+  "devDependencies": {
+    "@types/aws-lambda": "0.0.5",
+    "@types/node": "^6.0.48",
+    "codelyzer": "1.0.0-beta.4",
+    "rimraf": "^2.5.4",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.10"
+  }
 }
