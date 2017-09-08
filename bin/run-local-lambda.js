@@ -22,7 +22,8 @@
 		file : 'index.js',
 		event : 'event.json',
 		timeout : 3000,
-		handler : 'handler'
+		handler : 'handler',
+		processenv : ''
 	};
 
 	/*
@@ -33,9 +34,11 @@
 	 * --event, -e <event:string> 			#Name of the file containing the event object (Default: event.json)
 	 * --timeout, -t <timeout:int>			#The timeout in seconds (Default: 3 seconds)
 	 * --handler, -h <handler:string> 		#Name of the handler function to invoke (Default: handler.exports)
+	 * --processenv, -p <environment:string> 		#Name of the file containing the event object (Default: event.json)
 	 *
 	 * E.g. node run-local-lambda (providing index.js and event.json are in the current directory)
 	 * E.g. node run-local-lambda --file index.js --event event.json --timeout 3 --memory 128 --handler handler
+	 * E.g. node run-local-lambda --file index.js --event event.json --timeout 3 --memory 128 --handler handler --processenv environment.json
 	 */
 	var processArguments = function(settings) {
 		process.argv.forEach(function(argument, index, array){
@@ -47,6 +50,11 @@
 
 				case '--event': {
 					settings.event = array[index+1];
+					break;
+				}
+
+				case '--processenv': {
+					settings.processenv = array[index+1];
 					break;
 				}
 
@@ -125,9 +133,21 @@
 		process.exit();
 	}
 
+  function processEnv(settings){
+		if(settings.processenv!='') {
+      var processenv = require(path.resolve(settings.processenv, '.'));
+			for(var attributename in processenv){
+	    	process.env[ attributename] = processenv[attributename];
+			}
+		}
+	}
+
 	processArguments(settings);
 
+  processEnv(settings);
+
 	var event = require(path.resolve(settings.event, '.'));
+
 	var context = createContext(settings.timeout);
 
 	var lambda = require(path.resolve(settings.file, '.'));
