@@ -21,6 +21,13 @@ Your Lambda function should have a package.json which you can modify to add a te
     "test": "run-local-lambda --file index.js --event tests/event.json --timeout 3"
 }
 ```
+To add some environment variables to your test script, you can add --processenv so:
+
+```js
+"scripts": {
+    "test": "run-local-lambda --file index.js --event tests/event.json -- processenv tests/envir.json --timeout 3"
+}
+```
 
 Finally, you can invoke your test by simply running:
 
@@ -50,6 +57,7 @@ This module accepts the following parameters which are all optional.
 * --event [event file name] 	- Event data file name. Default: event.json
 * --handler [handler name]  	- Lambda function handler. Default: handler
 * --timeout [timeout seconds] 	- The timeout in seconds. Default: 3
+* --processenv [environment file name] 	- Environment data file name. Default: blank (optional)
 
 ### Context
 The context object provides the following public methods:
@@ -102,6 +110,14 @@ The event data file can be provided using the --event parameter. An event is jus
          }
       }
    ]
+}
+```
+### Environment
+The environment data file can be provided using the --processenv parameter. An event is just a JSON object such as:
+
+```js
+{
+  "BUCKET":"<BUCKET-NAME>"
 }
 ```
 
