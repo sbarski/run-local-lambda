@@ -22,7 +22,8 @@
 		file : 'index.js',
 		event : 'event.json',
 		timeout : 3000,
-		handler : 'handler'
+		handler : 'handler',
+		async: false
 	};
 
 	/*
@@ -59,6 +60,11 @@
 					settings.handler = array[index+1];
 					break;
 				}
+
+				case '--async': {
+          				settings.async = true;
+          				break;
+        			}
 			}
 		});
 	}
@@ -131,14 +137,23 @@
 	var context = createContext(settings.timeout);
 
 	var lambda = require(path.resolve(settings.file, '.'));
-
-	var execute = function(){
+	var execute = async function(){
 		setTimeout(function(){
 			console.log('The function timed out after ' + settings.timeout + ' seconds');
 			process.exit();
 		}, settings.timeout);
 
-		lambda[settings.handler](event, context, callback)
+		if (settings.async) {
+			let result, err = null
+			try {
+                        	result = await lambda[settings.handler](event, context)
+			} catch(err) {
+        			err = err
+			}
+			callback(err, result)
+		} else {
+		  lambda[settings.handler](event, context, callback)
+		}
 	};
 
 	execute();
