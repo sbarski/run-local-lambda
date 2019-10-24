@@ -134,7 +134,7 @@
 
 	var execute = function(){
 		setTimeout(function(){
-			console.log('The function timed out after ' + settings.timeout + ' seconds');
+			console.log('The function timed out after ' + (settings.timeout / 1000).toFixed(2) + ' seconds');
 			process.exit();
 		}, settings.timeout);
 
